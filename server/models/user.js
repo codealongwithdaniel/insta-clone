@@ -50,9 +50,17 @@ UserSchema.statics.addUser = function(data){
     })
 }
 
-UserSchema.methods.findUser = function(data, callback){
+UserSchema.methods.findUser = function(){
     return new Promise((resolve, reject)=>{
-        return this.model('User').findOne({data}, callback)
+        // console.log(data);
+        this.model('User').findOne((err, result)=>{
+            console.log(result);
+            if(err){
+                reject(err);
+            }else{
+                resolve(result);
+            }
+        })
     })
 }
 
