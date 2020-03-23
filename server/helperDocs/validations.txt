@@ -1,0 +1,21 @@
+name: String,
+userName: String,
+website: String,
+bio: String,
+email: String,
+phoneNumber: Number,
+gender: String,
+password: String,
+photo: String,
+posts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+}],
+followers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+}],
+follwing: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+}]
