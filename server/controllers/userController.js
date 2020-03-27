@@ -121,7 +121,33 @@ const userController = {
     },
 
     updateUser: function (req, res) {
-
+        const errors = validationResult(req);
+        if (errors.length) {
+            res.json({
+                success: false,
+                message: errors
+            });
+        }else{
+            const updateData = {
+                userName: req.body.userName,
+                phoneNumber: req.body.phoneNumber,
+                gender: req.body.gender
+            }
+            userModel.findByIdAndUpdate(req.id, updateData, function(err, data){
+                if(err){
+                    console.log(err);
+                    res.json({
+                        success: false,
+                        message: 'Something went wrong'
+                    });
+                }else{
+                    res.json({
+                        success: true,
+                        message: 'Update successfull'
+                    });
+                }
+            })
+        }
     }
 }
 
