@@ -64,6 +64,7 @@ UserSchema.methods.findUser = function(){
     })
 }
 
+
 const User = mongoose.model('User',UserSchema);
 
 

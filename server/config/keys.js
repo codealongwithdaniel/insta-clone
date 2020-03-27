@@ -1,5 +1,6 @@
 module.exports = {
-    host: 8000,
+    host: 4000,
     mongoURI: 'localhost:27017',
-    jwtSecret: 'wqertyufvbnjfrwfgrcbg'
+    jwtSecret: 'wqertyufvbnjfrwfgrcbg',
+    uploadFolder: 'uploads/' 
 }
