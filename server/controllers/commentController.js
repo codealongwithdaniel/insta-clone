@@ -5,6 +5,7 @@ const {
     check,
     validationResult
 } = require('express-validator');
+var ObjectId = require('mongodb').ObjectID;
 
 const commentController = {
     addComment: function(req, res){
@@ -22,11 +23,13 @@ const commentController = {
                         message: 'Something went wrong'
                     });
                 }
-                const newComment = {
+                const newComment = new commentModel({
                     comment: req.body.comment,
                     user: user
-                }
-                postModel.findById(req.params.id, function(err, post){
+                })
+                // console.log('post id', req.body.postId)
+                postModel.findById(req.body.postId, function(err, post){
+                    // console.log(post)
                     if(err){
                         res.json({
                             success: false,

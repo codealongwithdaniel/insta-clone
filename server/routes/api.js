@@ -9,11 +9,14 @@ const user = require('../models/user');
 //  All controllers
 const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
+const commentController = require('../controllers/commentController');
 
 //  All Validations
 const userValidations = require('../validations/userValidation');
 const postValidations = require('../validations/postValidation');
+const commentValidations = require('../validations/commentValidation');
 
+const auth = require('../config/authConfig');
 //  Multer config
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -42,5 +45,11 @@ router.post('/users/signin', userValidations.signIn, userController.signin)
 router.post('/users/update', userValidations.updateUser, userController.updateUser);
 
 //  Post Routes
-router.post('/posts/add', [upload.array('photos', 10)], postController.addPost);
+router.post('/posts/add', [postValidations.addPost, upload.array('photos', 10), auth], postController.addPost);
+
+router.get('/posts/getUserPosts', auth,postController.getAllPostsWithUserId);
+
+//  Comment Routes
+router.post('/comments/add',[auth, commentValidations.addComment], commentController.addComment);
+
 module.exports = router;

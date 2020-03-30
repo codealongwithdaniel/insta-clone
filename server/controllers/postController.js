@@ -4,9 +4,8 @@ const {
     check,
     validationResult
 } = require('express-validator');
-const multer = require('multer');
 const keys = require('../config/keys');
-
+const _ = require('lodash');
 function returnFileUrlName(file){
     return keys.uploadFolder+file.filename;
 }
@@ -61,6 +60,32 @@ const postController = {
                     results: post
                 });
             }
+        })
+    },
+
+    getAllPostsWithUserId: function(req, res){
+        userModel.findById(req.user.id)
+        .populate({
+            path:'posts',
+            populate:{
+                path: 'comments',
+                populate:{
+                    path:'user',
+                    select: 'name'
+                }
+            }
+        })
+        .then((data)=>{
+            res.json({
+                success: false,
+                results: data
+            });
+        })
+        .catch((err)=>{
+            res.json({
+                success: false,
+                message: 'Something went wrong'
+            });
         })
     }
 }

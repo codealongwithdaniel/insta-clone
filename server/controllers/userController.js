@@ -6,7 +6,7 @@ const {
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
-
+const keys = require('../config/keys');
 //  some helper functions
 function hashPassword(password, callback) {
     bcrypt.hash(password, saltRounds, function (err, hash) {
@@ -63,21 +63,37 @@ const userController = {
                         password: hashedPassword,
                         email: req.body.email
                     }
-                    userModel.addUser(newUserData)
-                        .then((response) => {
-                            console.log(response);
-                            res.json({
-                                success: true,
-                                message: 'New user added'
-                            });
-                        })
-                        .catch((err) => {
-                            console.log(err);
+                    userModel.findOne({email: req.body.email})
+                    .then((user)=>{
+                        if(!user){
+                            userModel.addUser(newUserData)
+                            .then((response) => {
+                                console.log(response);
+                                res.json({
+                                    success: true,
+                                    message: 'New user added'
+                                });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                res.json({
+                                    success: false,
+                                    message: 'Something went wrong'
+                                });
+                            })
+                        }else{
                             res.json({
                                 success: false,
-                                message: 'Something went wrong'
+                                message: 'User already exists'
                             });
-                        })
+                        }
+                    }).catch((err)=>{
+                        console.log(err);
+                        res.json({
+                            success: false,
+                            message: 'Something went wrong'
+                        });
+                    })
                 }
             })
         }
@@ -100,7 +116,7 @@ const userController = {
                     matchPasswords(req.body.password, response.password)
                         .then((signinResults) => {
                             if(signinResults){
-                                const token = jwt.sign({id: response._id}, privateKey, {  expiresIn: '2d' });
+                                const token = jwt.sign({id: response._id}, keys.jwtSecret, {  expiresIn: '10d' });
                                 res.json({success: true, token: token});
                             }else{
                                 res.json({success: false, message: 'Authentication failed'});
