@@ -1,0 +1,25 @@
+<Header
+                backgroundColor = "#FAFAFA"
+                leftComponent={<Icon
+                name='ios-camera'
+                type='ionicon'
+                color='#000000'/>}
+                centerComponent={{ text: 'Instagram', style: { color: '#000000' } }}
+                rightComponent={
+                <View style={styles.flexRow}>
+                    <View style={styles.mr40}>
+                        <Icon
+                        name='ios-tv'
+                        type='ionicon'
+                        color='#000000'
+                        />
+                    </View>
+                    <View>
+                        <Icon
+                        name='ios-send'
+                        type='ionicon'
+                        color='#000000'
+                        />
+                    </View>
+                </View>}
+            />

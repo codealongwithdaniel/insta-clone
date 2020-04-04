@@ -19,15 +19,15 @@ const FooterNav = (props) => {
             </View>
             <View style={[styles.flex1, styles.textCenter]}>
                 <Icon
-                name='ios-heart'
-                type='ionicon'
-                color='#000000'/>
-            </View>
-            <View style={[styles.flex1, styles.textCenter]}>
-                <Icon
                 name='ios-add'
                 type='ionicon'
                 color='#000000' />
+            </View>
+            <View style={[styles.flex1, styles.textCenter]}>
+                <Icon
+                name='ios-heart'
+                type='ionicon'
+                color='#000000'/>
             </View>
             <View style={[styles.flex1, styles.textCenter]}>
                 <Icon
