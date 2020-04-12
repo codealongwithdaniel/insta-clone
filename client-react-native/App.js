@@ -1,24 +1,62 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+
 import { createStackNavigator } from '@react-navigation/stack';
-import FooterNav from './components/FooterNav';
 import HomePage from './components/HomePage';
-import { Icon, Card, Header } from 'react-native-elements';
+import AddPostPage from './components/AddPostPage';
+import SearchPage from './components/SearchPage';
+import ProfilePage from './components/ProfilePage';
+import NotifiactionPage from './components/NotificationPage';
+import DiscoverPage from './components/DiscoverPage';
+import DiscoverNav from './navigation/DiscoverNav';
+import { Ionicons } from '@expo/vector-icons';
+
 export default function App() {
   return (
     <View style={styles.flex1}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="home" headerMode="none" options={{headerShown: false}} component={HomePage} />
-        </Stack.Navigator>
+        <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = 'md-home'
+            } else if (route.name === 'Discover') {
+              iconName = 'md-search';
+            } else if (route.name === 'Add') {
+              iconName = 'md-add';
+            } else if (route.name === 'Notifications') {
+              iconName = 'md-heart';
+            } else if (route.name === 'Profile') {
+              iconName = 'md-person';
+            }
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'black',
+          inactiveTintColor: 'black',
+          showLabel: false
+        }}
+      >
+          <Tab.Screen name="Home" component={HomePage} />
+          <Tab.Screen name="Discover" component={DiscoverNav} />
+          <Tab.Screen name="Add" component={AddPostPage} />
+          <Tab.Screen name="Notifications" component={NotifiactionPage} />
+          <Tab.Screen name="Profile" component={ProfilePage} />
+        </Tab.Navigator>
       </NavigationContainer>
-      <FooterNav />
     </View>
   );
 }
 
 const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
 
 const styles = StyleSheet.create({
   container: {

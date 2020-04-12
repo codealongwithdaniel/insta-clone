@@ -1,15 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import { Icon, Card } from 'react-native-elements';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
+// const navigation = useNavigation();
 const FooterNav = (props) => {
     return(
         <View style={styles.flexRow}>
             <View style={[styles.flex1, styles.textCenter]}>
-                <Icon
-                name='ios-home'
-                type='ionicon'
-                color='#000000'/>
+                <TouchableHighlight>
+                    <Icon
+                    name='ios-home'
+                    type='ionicon'
+                    color='#000000'/>
+                </TouchableHighlight>
             </View>
             <View style={[styles.flex1, styles.textCenter]}>
                 <Icon
@@ -38,6 +43,7 @@ const FooterNav = (props) => {
         </View>
     )
 }
+
 
 const styles = StyleSheet.create({
     flex1:{
