@@ -11,6 +11,7 @@ import ProfilePage from './components/ProfilePage';
 import NotifiactionPage from './components/NotificationPage';
 import DiscoverPage from './components/DiscoverPage';
 import DiscoverNav from './navigation/DiscoverNav';
+import ImageUpload from './components/ImageUpload';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function App() {

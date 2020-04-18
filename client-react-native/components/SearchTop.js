@@ -27,8 +27,9 @@ const SearchTop = (props) =>{
                 <View style={[styles.p10, styles.mlAuto]}>
                     <Icon
                         name='x'
+                        size={14}
                         type='feather'
-                        color='#000000' />
+                        color='#808080' />
                 </View>
             </View>
         </View>
