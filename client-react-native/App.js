@@ -40,7 +40,8 @@ export default function App() {
         tabBarOptions={{
           activeTintColor: 'black',
           inactiveTintColor: 'black',
-          showLabel: false
+          showLabel: false,
+          showIcon:true
         }}
       >
           <Tab.Screen name="Home" component={HomePage} />

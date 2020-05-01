@@ -14,7 +14,7 @@ const HomePage = (props) =>{
         ]     
         };
     return (
-        <View style={styles.marginTest}>
+        <View style={styles.mb50}>
             <Header
                 containerStyle = {{height: 50, paddingBottom:25}}
                 backgroundColor = "#FAFAFA"
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
         // textAlign: "right"
         marginLeft: "auto"
     },
-    marginTest:{
+    mb50:{
         marginBottom: 50
     },
     fontBold:{
